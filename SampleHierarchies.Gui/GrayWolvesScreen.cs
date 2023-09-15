@@ -1,5 +1,7 @@
-﻿using SampleHierarchies.Data.Mammals;
+﻿using SampleHierarchies.Data;
+using SampleHierarchies.Data.Mammals;
 using SampleHierarchies.Enums;
+using SampleHierarchies.Interfaces.Data;
 using SampleHierarchies.Interfaces.Services;
 
 namespace SampleHierarchies.Gui
@@ -17,12 +19,20 @@ namespace SampleHierarchies.Gui
         private IDataService _dataService;
 
         /// <summary>
+        /// Screen definition for the GrayWolvesScreen.
+        /// </summary>
+        public IScreenDefinition ScreenDefinition { get; }
+
+        /// <summary>
         /// Constructor for the GrayWolvesScreen.
         /// </summary>
         /// <param name="dataService">Data service reference</param>
-        public GrayWolvesScreen(IDataService dataService)
+        /// <param name="screenDefinitionService">Screen definition service reference</param>
+        public GrayWolvesScreen(IDataService dataService, IScreenDefinitionService screenDefinitionService)
+    : base("gray-wolves-screen-definition.json")
         {
             _dataService = dataService;
+            ScreenDefinition = screenDefinitionService.Load(ScreenDefinitionJson);
         }
 
         #endregion Properties And Ctor
@@ -228,7 +238,11 @@ namespace SampleHierarchies.Gui
             bool howlingCommunication = bool.Parse(howlingCommunicationAsString);
             bool strongJaws = bool.Parse(strongJawsAsString);
 
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             GrayWolf grayWolf = new GrayWolf(name, age, packHunter, howlingCommunication, carnivorousDiet, strongJaws, goodSenseOfSmell);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
 
             return grayWolf;
         }

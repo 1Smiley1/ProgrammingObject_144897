@@ -66,6 +66,8 @@ namespace ImageTagger.FrontEnd.WinForms
                     services.AddSingleton<AnimalsScreen, AnimalsScreen>();
                     services.AddSingleton<LionsScreen, LionsScreen>(); // Add this line for LionsScreen.
                     services.AddSingleton<GrayWolvesScreen, GrayWolvesScreen>(); // Add this line for GrayWolvesScreen.
+
+                    services.AddSingleton<IScreenDefinitionService, ScreenDefinitionService>();
                 });
         }
 
@@ -74,10 +76,14 @@ namespace ImageTagger.FrontEnd.WinForms
         /// </summary>
         private static void SaveMammalsToJson()
         {
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             var dataService = ServiceProvider.GetRequiredService<IDataService>();
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
 
             // Save each type of mammal to a separate JSON file
+#pragma warning disable CS8602 // Разыменование вероятной пустой ссылки.
             SaveToJson(dataService.Animals.Mammals.Dogs, "dogs.json");
+#pragma warning restore CS8602 // Разыменование вероятной пустой ссылки.
             SaveToJson(dataService.Animals.Mammals.AfricanElephants, "africanelephants.json");
             SaveToJson(dataService.Animals.Mammals.Lions, "lions.json");
             SaveToJson(dataService.Animals.Mammals.GrayWolves, "graywolves.json");

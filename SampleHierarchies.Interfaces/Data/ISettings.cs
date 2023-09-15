@@ -42,5 +42,6 @@ public interface ISettings
     /// </summary>
     string DogsScreenColor { get; set; }
 
+
     // Other existing properties and methods can remain as they are.
 }

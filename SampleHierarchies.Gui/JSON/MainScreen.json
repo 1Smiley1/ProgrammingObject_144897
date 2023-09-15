@@ -1,0 +1,27 @@
+﻿{
+  "BackgroundColor": "White",
+  "ForegroundColor": "Black",
+  "Text": "Main Screen Content",
+
+  "Title": "Main Screen",
+  "LineEntries": [
+    {
+      "Text": "Option 1",
+      "Description": "Description for Option 1"
+    },
+    {
+      "Text": "Option 2",
+      "Description": "Description for Option 2"
+    }
+  ],
+  "ListEntriesPl": [
+    {
+      "Text": "Opcja 1",
+      "Description": "Opis dla Opcji 1"
+    },
+    {
+      "Text": "Opcja 2",
+      "Description": "Opis dla Opcji 2"
+    }
+  ]
+}

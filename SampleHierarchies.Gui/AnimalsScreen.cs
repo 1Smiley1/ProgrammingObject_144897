@@ -1,4 +1,6 @@
-﻿using SampleHierarchies.Enums;
+﻿using SampleHierarchies.Data;
+using SampleHierarchies.Enums;
+using SampleHierarchies.Interfaces.Data;
 using SampleHierarchies.Interfaces.Services;
 
 namespace SampleHierarchies.Gui
@@ -21,14 +23,24 @@ namespace SampleHierarchies.Gui
         private MammalsScreen _mammalsScreen;
 
         /// <summary>
+        /// Screen definition for the AnimalsScreen.
+        /// </summary>
+        public IScreenDefinition ScreenDefinition { get; }
+
+
+        /// <summary>
         /// Constructor for the AnimalsScreen.
         /// </summary>
         /// <param name="dataService">Data service reference</param>
         /// <param name="mammalsScreen">Mammals screen instance</param>
-        public AnimalsScreen(IDataService dataService, MammalsScreen mammalsScreen)
+        /// <param name="screenDefinitionService">Screen definition service reference</param>
+
+        public AnimalsScreen(IDataService dataService, MammalsScreen mammalsScreen, IScreenDefinitionService screenDefinitionService)
+    : base("animals-screen-definition.json")
         {
             _dataService = dataService;
             _mammalsScreen = mammalsScreen;
+            ScreenDefinition = screenDefinitionService.Load(ScreenDefinitionJson);
         }
 
         #endregion Properties And Ctor

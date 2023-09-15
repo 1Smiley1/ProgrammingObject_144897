@@ -1,5 +1,7 @@
-﻿using SampleHierarchies.Data.Mammals;
+﻿using SampleHierarchies.Data;
+using SampleHierarchies.Data.Mammals;
 using SampleHierarchies.Enums;
+using SampleHierarchies.Interfaces.Data;
 using SampleHierarchies.Interfaces.Services;
 
 namespace SampleHierarchies.Gui
@@ -17,12 +19,20 @@ namespace SampleHierarchies.Gui
         private IDataService _dataService;
 
         /// <summary>
+        /// Screen definition for the DogsScreen.
+        /// </summary>
+        public IScreenDefinition ScreenDefinition { get; }
+
+        /// <summary>
         /// Constructor for the DogsScreen.
         /// </summary>
         /// <param name="dataService">Data service reference</param>
-        public DogsScreen(IDataService dataService)
+        /// <param name="screenDefinitionService">Screen definition service reference</param>
+        public DogsScreen(IDataService dataService, IScreenDefinitionService screenDefinitionService)
+    : base("dogs-screen-definition.json")
         {
             _dataService = dataService;
+            ScreenDefinition = screenDefinitionService.Load(ScreenDefinitionJson);
         }
 
         #endregion Properties And Ctor

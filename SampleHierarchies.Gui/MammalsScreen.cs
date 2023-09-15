@@ -1,5 +1,7 @@
 ﻿using System;
+using SampleHierarchies.Data;
 using SampleHierarchies.Enums;
+using SampleHierarchies.Interfaces.Data;
 using SampleHierarchies.Interfaces.Services;
 
 namespace SampleHierarchies.Gui
@@ -31,6 +33,12 @@ namespace SampleHierarchies.Gui
         /// </summary>
         private GrayWolvesScreen _grayWolvesScreen;
 
+
+        /// <summary>
+        /// Screen definition for the MammalsScreen.
+        /// </summary>
+        public IScreenDefinition ScreenDefinition { get; }
+
         /// <summary>
         /// Ctor.
         /// </summary>
@@ -38,12 +46,16 @@ namespace SampleHierarchies.Gui
         /// <param name="africanElephantsScreen">AfricanElephants screen reference</param>
         /// <param name="lionsScreen">Lions screen reference</param>
         /// <param name="grayWolvesScreen">GrayWolves screen reference</param>
-        public MammalsScreen(DogsScreen dogsScreen, AfricanElephantsScreen africanElephantsScreen, LionsScreen lionsScreen, GrayWolvesScreen grayWolvesScreen)
+        /// <param name="screenDefinitionService">Screen definition service reference</param>
+        public MammalsScreen(DogsScreen dogsScreen, AfricanElephantsScreen africanElephantsScreen, LionsScreen lionsScreen, GrayWolvesScreen grayWolvesScreen, IScreenDefinitionService screenDefinitionService)
+    : base("mammals-screen-definition.json")
         {
             _dogsScreen = dogsScreen;
             _africanElephantsScreen = africanElephantsScreen;
             _lionsScreen = lionsScreen;
-            _grayWolvesScreen = grayWolvesScreen; // Initialize the GrayWolvesScreen
+            _grayWolvesScreen = grayWolvesScreen;
+
+            ScreenDefinition = screenDefinitionService.Load(ScreenDefinitionJson);
         }
 
         #endregion Properties And Ctor

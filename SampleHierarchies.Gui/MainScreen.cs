@@ -1,6 +1,8 @@
-﻿using SampleHierarchies.Enums;
+﻿using SampleHierarchies.Data;
+using SampleHierarchies.Enums;
 using SampleHierarchies.Interfaces.Data;
 using SampleHierarchies.Interfaces.Services;
+using SampleHierarchies.Services;
 
 namespace SampleHierarchies.Gui
 {
@@ -12,6 +14,9 @@ namespace SampleHierarchies.Gui
         private readonly IDataService _dataService;
         private readonly AnimalsScreen _animalsScreen;
         private readonly ISettingsService _settingsService; // Step 1: Inject the ISettingsService.
+        private readonly IScreenDefinitionService _screenDefinitionService;
+        private readonly List<string> history = new List<string>();
+
 
         /// <summary>
         /// Constructor for the MainScreen.
@@ -19,14 +24,21 @@ namespace SampleHierarchies.Gui
         /// <param name="dataService">Data service reference</param>
         /// <param name="animalsScreen">Animals screen reference</param>
         /// <param name="settingsService">Settings service reference</param>
+        /// <param name="screenDefinitionService">Settings service reference</param>
+
+
+
         public MainScreen(
             IDataService dataService,
             AnimalsScreen animalsScreen,
-            ISettingsService settingsService) // Step 1: Inject the ISettingsService.
+            ISettingsService settingsService,
+            IScreenDefinitionService screenDefinitionService)
+            : base("main-screen-definition.json") // Ustaw nazwę pliku JSON dla tego ekranu
         {
             _dataService = dataService;
             _animalsScreen = animalsScreen;
-            _settingsService = settingsService; // Step 1: Assign the injected ISettingsService to the private field.
+            _settingsService = settingsService;
+            _screenDefinitionService = screenDefinitionService;
         }
 
         /// <inheritdoc/>
@@ -34,19 +46,29 @@ namespace SampleHierarchies.Gui
         {
             while (true)
             {
-                // Step 2: Apply the colors obtained from the settings to different elements of the screen.
+                // Wczytaj ustawienia kolorów z pliku JSON
                 ISettings? settings = _settingsService.Read("settings.json");
-                if (settings == null)
+
+                // Ustaw kolory na podstawie wczytanych ustawień
+                if (settings != null)
                 {
-                    // If settings are not available or null, use default values.
-                    Console.BackgroundColor = ConsoleColor.Black;
-                    Console.ForegroundColor = ConsoleColor.White;
+                    Console.BackgroundColor = ColorConverter.Convert(settings.MainScreenColor);
+                    Console.ForegroundColor = ColorConverter.Convert(settings.TextColor);
                 }
                 else
                 {
-                    // Convert and apply the colors from settings.
-                    Console.BackgroundColor = ColorConverter.Convert(settings.MainScreenColor);
-                    Console.ForegroundColor = ColorConverter.Convert(settings.TextColor);
+                    // Ustaw domyślne kolory, jeśli nie udało się wczytać ustawień
+                    Console.BackgroundColor = ConsoleColor.Black;
+                    Console.ForegroundColor = ConsoleColor.White;
+                }
+
+                Console.Clear(); // Wyczyść ekran przed wyświetleniem nowej zawartości
+
+                // Wyświetl historię wyborów
+                Console.WriteLine("History:");
+                foreach (var entry in history)
+                {
+                    Console.WriteLine(entry);
                 }
 
                 Console.WriteLine();
@@ -68,18 +90,23 @@ namespace SampleHierarchies.Gui
                     MainScreenChoices choice = (MainScreenChoices)Int32.Parse(choiceAsString);
                     switch (choice)
                     {
-                        case MainScreenChoices.Animals:
+                        
+                        case  MainScreenChoices.Animals:
+                            history.Add("Main Screen -> Animals");
                             _animalsScreen.Show();
                             break;
 
                         case MainScreenChoices.Settings:
+                            history.Add("Main Screen -> Create Settings");
                             Console.WriteLine("Not yet implemented.");
                             // TODO: implement
                             break;
+                      
 
                         case MainScreenChoices.Exit:
                             Console.WriteLine("Goodbye.");
                             return;
+
                     }
                 }
                 catch
@@ -118,4 +145,6 @@ namespace SampleHierarchies.Gui
             }
         }
     }
+
+
 }

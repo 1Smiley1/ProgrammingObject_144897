@@ -1,5 +1,7 @@
-﻿using SampleHierarchies.Data.Mammals;
+﻿using SampleHierarchies.Data;
+using SampleHierarchies.Data.Mammals;
 using SampleHierarchies.Enums;
+using SampleHierarchies.Interfaces.Data;
 using SampleHierarchies.Interfaces.Services;
 
 namespace SampleHierarchies.Gui
@@ -15,14 +17,22 @@ namespace SampleHierarchies.Gui
         /// Data service.
         /// </summary>
         private IDataService _dataService;
+       
+        /// <summary>
+        /// Screen definition for the LionsScreen.
+        /// </summary>
+        public IScreenDefinition ScreenDefinition { get; }
 
         /// <summary>
         /// Constructor for the LionsScreen.
         /// </summary>
         /// <param name="dataService">Data service reference</param>
-        public LionsScreen(IDataService dataService)
+        /// <param name="screenDefinitionService">Screen definition service reference</param>
+        public LionsScreen(IDataService dataService, IScreenDefinitionService screenDefinitionService)
+     : base("lions-screen-definition.json")
         {
             _dataService = dataService;
+            ScreenDefinition = screenDefinitionService.Load(ScreenDefinitionJson);
         }
 
         #endregion Properties And Ctor
@@ -233,7 +243,9 @@ namespace SampleHierarchies.Gui
             bool roaringCommunication = bool.Parse(roaringCommunicationAsString);
             bool territoryDefense = bool.Parse(territoryDefenseAsString);
 
+#pragma warning disable CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
             Lion lion = new Lion(name, age, apexPredator, packHunter, mane, roaringCommunication, territoryDefense);
+#pragma warning restore CS8604 // Возможно, аргумент-ссылка, допускающий значение NULL.
 
             return lion;
         }

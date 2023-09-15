@@ -15,7 +15,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleHierarchies.Services"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleHierarchies.Gui", "SampleHierarchies.Gui\SampleHierarchies.Gui.csproj", "{1D62C792-9B40-43A5-94C8-87804AD61773}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleHierarchies.Helpers", "SampleHierarchies.Helpers\SampleHierarchies.Helpers.csproj", "{87E3AA3C-9757-40FC-ACC7-B3287B288336}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "SampleHierarchies.Helpers", "SampleHierarchies.Helpers\SampleHierarchies.Helpers.csproj", "{87E3AA3C-9757-40FC-ACC7-B3287B288336}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "SampleHierarchies.Services.Tests", "SampleHierarchies.Services.Tests\SampleHierarchies.Services.Tests.csproj", "{BA0594DD-9E56-4770-8C97-B0516A0923AC}"
+	ProjectSection(ProjectDependencies) = postProject
+		{1D62C792-9B40-43A5-94C8-87804AD61773} = {1D62C792-9B40-43A5-94C8-87804AD61773}
+		{6E0317CE-2516-474A-A537-B4ED2F8AFA3B} = {6E0317CE-2516-474A-A537-B4ED2F8AFA3B}
+		{87E3AA3C-9757-40FC-ACC7-B3287B288336} = {87E3AA3C-9757-40FC-ACC7-B3287B288336}
+		{95515F24-CEFB-485C-AE39-274BB6C3C0EF} = {95515F24-CEFB-485C-AE39-274BB6C3C0EF}
+		{BE2ACC32-E93D-4119-9D72-7C7F431CAD0B} = {BE2ACC32-E93D-4119-9D72-7C7F431CAD0B}
+		{D031AC42-F792-46E1-A6A4-64F924D8C126} = {D031AC42-F792-46E1-A6A4-64F924D8C126}
+		{F2475B28-3AD5-4F6F-A31F-4D9451C1675D} = {F2475B28-3AD5-4F6F-A31F-4D9451C1675D}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +62,10 @@ Global
 		{87E3AA3C-9757-40FC-ACC7-B3287B288336}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{87E3AA3C-9757-40FC-ACC7-B3287B288336}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{87E3AA3C-9757-40FC-ACC7-B3287B288336}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BA0594DD-9E56-4770-8C97-B0516A0923AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BA0594DD-9E56-4770-8C97-B0516A0923AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BA0594DD-9E56-4770-8C97-B0516A0923AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BA0594DD-9E56-4770-8C97-B0516A0923AC}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
